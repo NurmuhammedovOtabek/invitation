@@ -1,15 +1,16 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "routes": [
-    { "src": "/audio/(.*)", "dest": "/public/audio/$1" },
-    { "src": "/css/(.*)", "dest": "/public/css/$1" },
-    { "src": "/js/(.*)", "dest": "/public/js/$1" },
-    { "src": "/templates/(.*)", "dest": "/public/templates/$1" },
-    { "src": "/emerald", "dest": "/public/templates/emerald.html" },
-    { "src": "/rose", "dest": "/public/templates/rose.html" },
-    { "src": "/midnight", "dest": "/public/templates/midnight.html" },
-    { "src": "/luxury", "dest": "/public/templates/luxury.html" },
-    { "src": "/(.*)", "dest": "/public/$1" }
+  "buildCommand": "echo 'Static build ready'",
+  "installCommand": "echo 'Skipping npm install for ultra-fast static deployment'",
+  "rewrites": [
+    { "source": "/emerald", "destination": "/templates/emerald.html" },
+    { "source": "/rose", "destination": "/templates/rose.html" },
+    { "source": "/midnight", "destination": "/templates/midnight.html" },
+    { "source": "/luxury", "destination": "/templates/luxury.html" },
+    { "source": "/audio/(.*)", "destination": "/public/audio/$1" },
+    { "source": "/css/(.*)", "destination": "/public/css/$1" },
+    { "source": "/js/(.*)", "destination": "/public/js/$1" },
+    { "source": "/templates/(.*)", "destination": "/public/templates/$1" }
   ]
 }
