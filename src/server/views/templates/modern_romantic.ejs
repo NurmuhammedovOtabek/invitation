@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><%= invitation.groom_name %> — Taklifnoma</title>
+  
+  <meta property="og:title" content="<%= invitation.groom_name %> — <%= invitation.event_type %>">
+  <meta property="og:description" content="Sizni to'yimizga lutfan taklif etamiz! Sanasi: <%= invitation.formattedDate %>">
+  <meta property="og:image" content="<%= invitation.photo_url || baseUrl + '/img/wedding_cover.jpg' %>">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #2d1521 0%, #12070d 100%);
+      color: #fdf2f8;
+    }
+    .text-rosegold {
+      background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 50%, #db2777 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-start pb-24 selection:bg-pink-500 selection:text-white">
+
+  <div id="particle-container" class="particle-container"></div>
+
+  <!-- Music Float Button -->
+  <div id="music-toggle-btn" class="music-btn-float !border-pink-400" title="Musiqa">
+    <div id="music-equalizer" class="equalizer-container">
+      <div class="eq-bar !bg-pink-400"></div>
+      <div class="eq-bar !bg-pink-400"></div>
+      <div class="eq-bar !bg-pink-400"></div>
+      <div class="eq-bar !bg-pink-400"></div>
+    </div>
+  </div>
+  <audio id="bg-audio" loop src="<%= invitation.audio_url || '/audio/romantic_sample.mp3' %>"></audio>
+
+  <!-- 3D Realistic Interactive Envelope Opening Screen -->
+  <div id="open-envelope-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-700">
+    <div class="mb-8 space-y-2">
+      <p class="font-serif-luxury text-xs tracking-[0.3em] uppercase text-pink-300/80">Save The Date</p>
+      <h2 class="font-script text-4xl md:text-5xl text-rosegold"><%= invitation.groom_name %></h2>
+    </div>
+
+    <!-- The 3D Envelope Box -->
+    <div id="main-envelope" class="envelope-wrapper my-4">
+      <div class="envelope-back" style="background: linear-gradient(135deg, #3d1b2c 0%, #1a0b13 100%); border-color: rgba(244, 114, 182, 0.4);"></div>
+      
+      <!-- Letter inside that rises up -->
+      <div class="envelope-letter" style="border-color: #f472b6;">
+        <p class="font-serif-luxury text-[10px] uppercase tracking-widest text-pink-900 font-bold mb-1">To'y Taklifnomasi</p>
+        <h3 class="font-script text-2xl text-pink-950 font-bold"><%= invitation.groom_name %></h3>
+        <p class="text-[11px] text-pink-800 mt-2 font-serif-luxury"><%= invitation.formattedDate || invitation.event_date %></p>
+        <div class="w-8 h-0.5 bg-pink-400 my-2"></div>
+        <p class="text-[9px] text-pink-600 italic">Ochilmoqda...</p>
+      </div>
+
+      <div class="envelope-pocket" style="border-left-color: #2b111e; border-right-color: #2b111e; border-bottom-color: #3b172a;"></div>
+      <div class="envelope-flap" style="border-top-color: #4c1d37;"></div>
+
+      <!-- Wax Seal Stamp -->
+      <div class="wax-seal animate-pulse-glow" style="background: radial-gradient(circle, #fbcfe8 0%, #f472b6 50%, #db2777 100%); border-color: #fdf2f8;">
+        <i data-lucide="heart" class="w-7 h-7 text-white fill-white/50"></i>
+      </div>
+    </div>
+
+    <div class="mt-10 space-y-2">
+      <span class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-400 to-rose-600 text-white font-bold text-xs tracking-wider shadow-lg shadow-pink-500/40 animate-bounce">
+        <i data-lucide="mail-open" class="w-4 h-4"></i> Ochish uchun bosing
+      </span>
+      <p class="text-[11px] text-pink-200/70">Musiqa bilan birga ochiladi 🌸</p>
+    </div>
+  </div>
+
+  <main class="w-full max-w-md px-4 pt-10 flex flex-col items-center text-center z-20 space-y-8">
+
+    <div class="space-y-2">
+      <p class="font-serif-luxury text-xs uppercase tracking-[0.3em] text-pink-300/80">Save The Date</p>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto"></div>
+    </div>
+
+    <div class="px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 backdrop-blur-sm">
+      <span class="text-xs font-medium uppercase tracking-widest text-pink-200"><%= invitation.event_type %></span>
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="font-script text-5xl md:text-6xl text-rosegold tracking-wide leading-tight drop-shadow-md">
+        <%= invitation.groom_name %>
+      </h1>
+      <p class="text-xs text-pink-200/70 tracking-widest uppercase font-light">Muhabbat qissasi</p>
+    </div>
+
+    <% if (invitation.photo_url) { %>
+    <div class="relative w-64 h-80 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-b from-pink-400 via-rose-500 to-pink-950 shadow-2xl shadow-rose-950/60">
+      <img src="<%= invitation.photo_url %>" alt="<%= invitation.groom_name %>" class="w-full h-full object-cover rounded-[22px]">
+    </div>
+    <% } %>
+
+    <div class="glass-card p-6 w-full text-center space-y-4 border-pink-500/20">
+      <div class="flex justify-center text-pink-400">
+        <i data-lucide="sparkles" class="w-6 h-6 animate-pulse"></i>
+      </div>
+      <p class="text-sm md:text-base leading-relaxed text-pink-100/90 font-light italic">
+        "<%= invitation.custom_text || 'Hayotimizdagi eng baxtli kunimizda sizdek qadrli insonlarni yonimizda ko\'rishdan benihoya baxtiyor bo\'lamiz!' %>"
+      </p>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="w-full space-y-3">
+      <h3 class="text-xs uppercase tracking-widest text-pink-300 font-semibold flex items-center justify-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4"></i> To'y kunigacha qoldi:
+      </h3>
+      
+      <div id="countdown-data" data-date="<%= invitation.event_date %>" data-time="<%= invitation.event_time %>" class="grid grid-cols-4 gap-2 w-full">
+        <div class="countdown-box !border-pink-500/30">
+          <span id="days" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-pink-200">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Kun</span>
+        </div>
+        <div class="countdown-box !border-pink-500/30">
+          <span id="hours" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-pink-200">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Soat</span>
+        </div>
+        <div class="countdown-box !border-pink-500/30">
+          <span id="minutes" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-pink-200">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Daqiqa</span>
+        </div>
+        <div class="countdown-box !border-pink-500/30">
+          <span id="seconds" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-pink-200">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Soniya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="glass-card p-6 w-full space-y-6 border-pink-500/20 text-left">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center shrink-0 text-pink-300">
+          <i data-lucide="calendar-heart" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="text-xs text-pink-400 uppercase tracking-wider font-semibold">Sana va Vaqt</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.formattedDate || invitation.event_date %></p>
+          <p class="text-xs text-pink-200/70">Boshlanish vaqti: <%= invitation.event_time || '18:00' %></p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center shrink-0 text-pink-300">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="text-xs text-pink-400 uppercase tracking-wider font-semibold">To'yxona / Manzil</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.venue_name %></p>
+          <p class="text-xs text-pink-200/70"><%= invitation.venue_address || 'Manzil ko\'rsatilmagan' %></p>
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        <% if (invitation.yandex_map_url) { %>
+        <a href="<%= invitation.yandex_map_url %>" target="_blank" rel="noopener" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+          <i data-lucide="navigation" class="w-4 h-4"></i> Yandex Xaritada ochish
+        </a>
+        <% } %>
+        <a href="/i/<%= invitation.id %>/calendar" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-pink-500/30 text-pink-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i> Taqvimga saqlash
+        </a>
+      </div>
+    </div>
+
+    <!-- Share -->
+    <div class="w-full pt-4 space-y-3">
+      <button onclick="copyInvitationLink()" class="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-pink-400/40 text-pink-200 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="copy" class="w-4 h-4"></i> Havolani nusxalash
+      </button>
+    </div>
+
+    <div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-pink-500 text-white text-xs font-bold rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+      ✅ Havola nusxalandi!
+    </div>
+
+    <footer class="pt-8 pb-4 text-[11px] text-gray-500 space-y-1">
+      <p>Barcha huquqlar himoyalangan © <%= new Date().getFullYear() %></p>
+    </footer>
+
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="/js/invitation.js"></script>
+</body>
+</html>

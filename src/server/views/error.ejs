@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title || 'Xatolik' %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1e1b4b 0%, #030712 100%);
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+  <div class="glass-card p-8 max-w-md w-full space-y-4 border-amber-500/20">
+    <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center text-3xl font-bold">
+      !
+    </div>
+    <h1 class="text-2xl font-serif-luxury font-bold text-white"><%= title %></h1>
+    <p class="text-sm text-gray-300 font-light"><%= message %></p>
+    <div class="pt-4">
+      <a href="/" class="px-6 py-2.5 rounded-xl bg-gold-luxury text-slate-950 font-bold text-xs inline-block shadow-lg">
+        Bosh sahifaga qaytish
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/audio/(.*)", "dest": "/public/audio/$1" },
+    { "src": "/css/(.*)", "dest": "/public/css/$1" },
+    { "src": "/js/(.*)", "dest": "/public/js/$1" },
+    { "src": "/templates/(.*)", "dest": "/public/templates/$1" },
+    { "src": "/emerald", "dest": "/public/templates/emerald.html" },
+    { "src": "/rose", "dest": "/public/templates/rose.html" },
+    { "src": "/midnight", "dest": "/public/templates/midnight.html" },
+    { "src": "/luxury", "dest": "/public/templates/luxury.html" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
+}

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Taklifnoma Olami — Zamonaviy To'y Taklifnomalari</title>
+  
+  <meta name="description" content="To'yingiz uchun zamonaviy interaktiv web-taklifnomalar. 3D konvert ochilishi, musiqa, xarita va ortga hisoblash taymeri bilan. Atigi 50 000 so'm!">
+  <meta property="og:title" content="Online Taklifnoma Olami — To'yingiz Uchun Mukammal Taklifnoma">
+  <meta property="og:description" content="Qog'oz taklifnomalardan 10 baravar arzon, 1-2 soatda tayyor, musiqa va lokatsiya bilan!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <style>
+    body {
+      background-color: #06090e;
+      color: #f8fafc;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.15) 0%, rgba(6, 9, 14, 0) 70%);
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-500 selection:text-slate-950">
+
+  <!-- =========================================================================
+       NAVIGATION BAR
+       ========================================================================= -->
+  <nav class="w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      
+      <a href="/" class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gold-luxury flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/20">
+          <i data-lucide="mail-open" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-serif-luxury font-bold text-lg text-white block leading-tight">Taklifnoma<span class="text-amber-400">.uz</span></span>
+          <span class="text-[10px] text-gray-400 block tracking-wider uppercase">Online Taklifnoma Olami</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 text-xs font-semibold text-gray-300">
+        <a href="#shablonlar" class="hover:text-amber-400 transition-colors">Shablonlar</a>
+        <a href="#afzalliklar" class="hover:text-amber-400 transition-colors">Afzalliklar</a>
+        <a href="#qadamlar" class="hover:text-amber-400 transition-colors">Qanday buyurtma beriladi?</a>
+        <a href="#faq" class="hover:text-amber-400 transition-colors">Savollar (FAQ)</a>
+      </div>
+
+      <!-- CTA Button to Telegram -->
+      <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20to%27y%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="py-2.5 px-4 sm:px-5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 flex items-center gap-2 active:scale-95 transition-all">
+        <i data-lucide="send" class="w-4 h-4"></i> <span>Buyurtma Berish</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       HERO SECTION
+       ========================================================================= -->
+  <header class="relative pt-12 pb-20 px-4 sm:px-6 hero-glow flex flex-col items-center text-center overflow-hidden">
+    
+    <div class="max-w-3xl space-y-6">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 backdrop-blur-sm">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span class="text-xs font-semibold text-amber-300 tracking-wide uppercase">2026-YILNING ENG OMMABOP TO'Y TAKLIFNOMALARI</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif-luxury font-bold text-white tracking-tight leading-tight">
+        To'yingiz Uchun Zamonaviy <br>
+        <span class="text-gold-luxury">Interaktiv Veb-Taklifnomalar</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
+        Qog'oz taklifnomalarga ortiqcha vaqt va pul sarflamang! Barcha ma'lumotlar, 3D ochilish animatsiyasi, nafis musiqa, to'y dasturi va Yandex xaritani bitta havolaga jamlang.
+      </p>
+
+      <!-- Key Benefits Chips -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs font-medium text-gray-300">
+        <span class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i> 1-2 soatda tayyor
+        </span>
+        <span class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+          <i data-lucide="music" class="w-3.5 h-3.5 text-pink-400"></i> Sevimli musiqa jo'rligida
+        </span>
+        <span class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-400"></i> Aniq lokatsiya va xarita
+        </span>
+        <span class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+          <i data-lucide="tag" class="w-3.5 h-3.5 text-emerald-400"></i> Atigi 50 000 so'm
+        </span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#shablonlar" class="w-full sm:w-auto py-4 px-8 rounded-2xl bg-gold-luxury text-slate-950 font-bold text-sm shadow-xl shadow-amber-500/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+          <i data-lucide="eye" class="w-4 h-4"></i> Namunaviy Shablonlarni Ko'rish
+        </a>
+
+        <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20taklifnomalar%20bo%27yicha%20ma%27lumot%20olmoqchi%20edim." target="_blank" class="w-full sm:w-auto py-4 px-8 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+          <i data-lucide="send" class="w-4 h-4 text-sky-400"></i> Telegram orqali yozish
+        </a>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- =========================================================================
+       SHOWCASE TEMPLATES GALLERY (SHABLONLAR)
+       ========================================================================= -->
+  <section id="shablonlar" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto space-y-12">
+    
+    <div class="text-center space-y-3">
+      <h2 class="text-3xl sm:text-4xl font-serif-luxury font-bold text-white">
+        Eng Mashhur <span class="text-gold-luxury">Taklifnoma Shablonlari</span>
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-400 max-w-lg mx-auto">
+        Har bir shablon jonli interaktiv, musiqali va telefon ekraniga 100% moslashgan. "Ko'rish" tugmasini bosib, o'zingiz sinab ko'ring:
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- TEMPLATE 1: EMERALD ROYAL -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden hover:border-amber-500/40 transition-all shadow-2xl flex flex-col justify-between group">
+        <div>
+          <!-- Thumbnail banner -->
+          <div class="relative h-64 bg-gradient-to-br from-[#0c3327] to-[#04140f] flex items-center justify-center p-6 border-b border-slate-800 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25)_0%,transparent_70%)]"></div>
+            
+            <div class="relative z-10 text-center space-y-2">
+              <span class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center mx-auto text-2xl shadow-lg">✉️</span>
+              <h3 class="font-great-vibes text-4xl text-amber-300">Sardor & Madina</h3>
+              <span class="inline-block px-3 py-1 rounded-full bg-slate-950/80 text-[10px] uppercase font-bold text-amber-400 tracking-wider border border-amber-500/30">3D Muhrli Konvert</span>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-white">Emerald Royal</h4>
+              <span class="font-bold text-base text-amber-400">50 000 so'm</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Hashamatli zangori-yashil va oltin ranglar uyg'unligi. Oltin muhrli 3D konvert sekin ochiladi, orqada romantik musiqa yangraydi va to'y dasturi chiqadi.
+            </p>
+
+            <div class="flex flex-wrap gap-2 text-[11px] text-gray-400">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">✉️ 3D Konvert</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎵 Romantik musiqa</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">📍 Yandex Xarita</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">👗 Dress Code</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+          <a href="/templates/emerald.html" target="_blank" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-all">
+            <i data-lucide="eye" class="w-4 h-4 text-amber-400"></i> Jonli Ko'rish
+          </a>
+          <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Emerald%20Royal%22%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs text-center flex items-center justify-center gap-1.5 shadow-md hover:brightness-110 active:scale-95 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i> Buyurtma Berish
+          </a>
+        </div>
+      </div>
+
+      <!-- TEMPLATE 2: ROSE BLOSSOM -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden hover:border-pink-500/40 transition-all shadow-2xl flex flex-col justify-between group">
+        <div>
+          <div class="relative h-64 bg-gradient-to-br from-[#3d1b2c] to-[#1a0a13] flex items-center justify-center p-6 border-b border-slate-800 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,114,182,0.25)_0%,transparent_70%)]"></div>
+            
+            <div class="relative z-10 text-center space-y-2">
+              <span class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-500/40 text-pink-300 flex items-center justify-center mx-auto text-2xl shadow-lg">🎀</span>
+              <h3 class="font-alex-brush text-4xl text-pink-200">Javohir & Diyora</h3>
+              <span class="inline-block px-3 py-1 rounded-full bg-slate-950/80 text-[10px] uppercase font-bold text-pink-400 tracking-wider border border-pink-500/30">Lenta & Sovg'a Qutisi</span>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-white">Rose Blossom</h4>
+              <span class="font-bold text-base text-pink-400">50 000 so'm</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Nafis pushti va atirgul barglari uslubi. Oltin lenta yechilib ochiladigan sovg'a qutisi effekti hamda mayin vals musiqasi. Romantik juftliklar uchun ayni muddao!
+            </p>
+
+            <div class="flex flex-wrap gap-2 text-[11px] text-gray-400">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎀 Sovg'a qutisi</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🌹 Tushuvchi barglar</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎻 Mayin vals</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">⏰ Taymer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+          <a href="/templates/rose.html" target="_blank" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-all">
+            <i data-lucide="eye" class="w-4 h-4 text-pink-400"></i> Jonli Ko'rish
+          </a>
+          <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Rose%20Blossom%22%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="py-3 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 shadow-md hover:brightness-110 active:scale-95 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i> Buyurtma Berish
+          </a>
+        </div>
+      </div>
+
+      <!-- TEMPLATE 3: MIDNIGHT ROYAL -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all shadow-2xl flex flex-col justify-between group">
+        <div>
+          <div class="relative h-64 bg-gradient-to-br from-[#0c1a30] to-[#030712] flex items-center justify-center p-6 border-b border-slate-800 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.25)_0%,transparent_70%)]"></div>
+            
+            <div class="relative z-10 text-center space-y-2">
+              <span class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/40 text-blue-300 flex items-center justify-center mx-auto text-2xl shadow-lg">🎭</span>
+              <h3 class="font-cinzel font-bold text-2xl text-blue-200">TEMURBEK & NODIRABEGIM</h3>
+              <span class="inline-block px-3 py-1 rounded-full bg-slate-950/80 text-[10px] uppercase font-bold text-blue-400 tracking-wider border border-blue-500/30">Shohona Baxmal Parda</span>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-white">Midnight Royal</h4>
+              <span class="font-bold text-base text-blue-400">50 000 so'm</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Ikkiga ochiluvchi shohona teatr pardasi, yulduzli tun effekti va yoqimli pianino ohangi. Dabdabali to'ylar va yuqori darajadagi marosimlar uchun ideal tanlov.
+            </p>
+
+            <div class="flex flex-wrap gap-2 text-[11px] text-gray-400">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎭 Shohona parda</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">⭐ Yulduzlar</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎹 Pianino musiqasi</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🏛 Rim shrifti</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+          <a href="/templates/midnight.html" target="_blank" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-all">
+            <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i> Jonli Ko'rish
+          </a>
+          <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Midnight%20Royal%22%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-sky-600 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 shadow-md hover:brightness-110 active:scale-95 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i> Buyurtma Berish
+          </a>
+        </div>
+      </div>
+
+      <!-- TEMPLATE 4: BLACK & GOLD LUXURY -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden hover:border-amber-500/40 transition-all shadow-2xl flex flex-col justify-between group">
+        <div>
+          <div class="relative h-64 bg-gradient-to-br from-[#111111] to-[#050505] flex items-center justify-center p-6 border-b border-slate-800 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25)_0%,transparent_70%)]"></div>
+            
+            <div class="relative z-10 text-center space-y-2">
+              <span class="w-12 h-12 rounded-2xl bg-zinc-800 border border-amber-500/40 text-amber-300 flex items-center justify-center mx-auto text-2xl shadow-lg">✨</span>
+              <h3 class="font-cinzel font-bold text-2xl text-gold-luxury">BOBUR & RAYHONA</h3>
+              <span class="inline-block px-3 py-1 rounded-full bg-slate-950/80 text-[10px] uppercase font-bold text-amber-400 tracking-wider border border-amber-500/30">Nurlar Porlashi</span>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-white">Black & Gold Luxury</h4>
+              <span class="font-bold text-base text-amber-400">50 000 so'm</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Qora fonda oltin jilolar va sharqona skripka musiqasi. Zamonaviy minimalizm va hashamatni o'zida mujassam etgan eng zamonaviy taklifnoma.
+            </p>
+
+            <div class="flex flex-wrap gap-2 text-[11px] text-gray-400">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">✨ Yulduzli porlash</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">🎻 Skripka sadosi</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">👑 Elita dizayn</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">💳 To'yona karta</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+          <a href="/templates/luxury.html" target="_blank" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-all">
+            <i data-lucide="eye" class="w-4 h-4 text-amber-400"></i> Jonli Ko'rish
+          </a>
+          <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Black%20%26%20Gold%22%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs text-center flex items-center justify-center gap-1.5 shadow-md hover:brightness-110 active:scale-95 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i> Buyurtma Berish
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       AFZALLIKLARIMIZ (NEGA AYNAN BIZ?)
+       ========================================================================= -->
+  <section id="afzalliklar" class="py-16 px-4 sm:px-6 bg-slate-950/60 border-y border-slate-800/80">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <div class="text-center space-y-3">
+        <h2 class="text-3xl sm:text-4xl font-serif-luxury font-bold text-white">
+          Nega Aynan <span class="text-gold-luxury">Onlayn Taklifnoma?</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-400 max-w-lg mx-auto">
+          Eski qog'oz taklifnomalarga qaraganda ancha qulay, tezkor va unutilmas taassurot qoldiradi:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-3 text-center">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center mx-auto text-xl">⚡️</div>
+          <h3 class="font-bold text-sm text-white">1-2 Soatda Tayyor</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Qog'oz taklifnomalarni kunlab kutish shart emas. Barcha ma'lumotlarni yuborsangiz, bir necha soatda tayyorlab beramiz.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-3 text-center">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mx-auto text-xl">💰</div>
+          <h3 class="font-bold text-sm text-white">Atigi 50 000 so'm</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Qog'oz taklifnoma uchun 500 000 — 1 500 000 so'm sarflash o'rniga, atigi 50 ming so'mga cheksiz mehmonga tarqating!
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-3 text-center">
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-300 flex items-center justify-center mx-auto text-xl">📍</div>
+          <h3 class="font-bold text-sm text-white">Yandex Xarita Integratsiyasi</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Mehmonlar bitta tugma bilan Yandex yoki Google Navigator orqali to'yxonagacha to'g'ri marshrut oladi, adashib qolmaydi.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-3 text-center">
+          <div class="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center mx-auto text-xl">🎵</div>
+          <h3 class="font-bold text-sm text-white">Musiqa & Romantika</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Mehmon taklifnomani ochishi bilan fon musiqasi yangraydi va chinakam bayramona kayfiyat baxsh etadi.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       QANDAY BUYURTMA BERILADI? (3 ODDIY QADAM)
+       ========================================================================= -->
+  <section id="qadamlar" class="py-16 px-4 sm:px-6 max-w-4xl mx-auto space-y-12">
+    
+    <div class="text-center space-y-3">
+      <h2 class="text-3xl sm:text-4xl font-serif-luxury font-bold text-white">
+        Buyurtma Berish Tartibi
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-400">
+        Bor-yo'g'i 3 ta oddiy qadam bilan o'z to'y taklifnomangizga ega bo'ling:
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+        <span class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center">1</span>
+        <h3 class="font-bold text-base text-white">Shablonni Tanlang</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Yuqoridagi namunalardan o'zingizga yoqqan dizaynni tanlang va jonli ko'rib chiqing.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+        <span class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center">2</span>
+        <h3 class="font-bold text-base text-white">Ma'lumotlarni Yuboring</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Telegram orqali <strong class="text-white">@nurmuhammedov_007</strong> ga ismlar, to'y sanasi, to'yxona nomi va rasmingizni yozing.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-3 relative">
+        <span class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center">3</span>
+        <h3 class="font-bold text-base text-white">Havolani Oling</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          1-2 soatda tayyorlangan individual havolani qabul qiling va barcha yaqinlaringizga yuboring!
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Telegram Action CTA -->
+    <div class="p-8 rounded-3xl bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent border border-amber-500/30 text-center space-y-4">
+      <h3 class="text-xl sm:text-2xl font-serif-luxury font-bold text-white">
+        To'yingizni Zamonaviy Taklifnoma Bilan Boshlang!
+      </h3>
+      <p class="text-xs text-gray-300 max-w-lg mx-auto">
+        Hoziroq Telegram orqali murojaat qiling va o'z taklifnomangizni buyurtma qiling.
+      </p>
+      <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20onlayn%20taklifnoma%20buyurtma%20qilmoqchiman." target="_blank" class="inline-flex items-center gap-2.5 py-3.5 px-8 rounded-2xl bg-gold-luxury text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/25 hover:brightness-110 active:scale-95 transition-all">
+        <i data-lucide="send" class="w-4 h-4"></i> Telegramda Buyurtma Berish: @nurmuhammedov_007
+      </a>
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       FAQ SECTION
+       ========================================================================= -->
+  <section id="faq" class="py-16 px-4 sm:px-6 max-w-3xl mx-auto space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-serif-luxury font-bold text-white">Tez-Tez Beriladigan Savollar</h2>
+      <p class="text-xs text-gray-400">Eng ko'p beriladigan savollarga javoblar</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+        <h4 class="font-bold text-sm text-white flex items-center justify-between">
+          <span>Taklifnoma qancha vaqtda tayyor bo'ladi?</span>
+          <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+        </h4>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Barcha ma'lumotlarni taqdim etganingizdan so'ng, taklifnomangiz 1-2 soat ichida to'liq tayyor qilib beriladi.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+        <h4 class="font-bold text-sm text-white flex items-center justify-between">
+          <span>O'z musiqamizni qo'ysak bo'ladimi?</span>
+          <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+        </h4>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Albatta! Telegramda o'zingiz yoqtirgan har qanday qo'shiq yoki ohangni yuborsangiz, uni taklifnomangizga qo'shib beramiz.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+        <h4 class="font-bold text-sm text-white flex items-center justify-between">
+          <span>Taklifnoma havolasi qancha vaqt ishlaydi?</span>
+          <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+        </h4>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Havola umrbod ishlaydi! To'ydan keyin ham u siz va mehmonlaringiz uchun go'zal xotira bo'lib qoladi.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+        <h4 class="font-bold text-sm text-white flex items-center justify-between">
+          <span>To'lov qanday amalga oshiriladi?</span>
+          <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+        </h4>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          To'lovni barcha bank kartalari (Click, Payme) orqali masofadan juda oson o'tkazasiz.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-slate-800/80 py-8 px-4 text-center text-xs text-gray-500 space-y-3">
+    <div class="flex items-center justify-center gap-4">
+      <a href="https://t.me/nurmuhammedov_007" target="_blank" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-sky-400 border border-slate-800 transition-all" title="Telegram">
+        <i data-lucide="send" class="w-4 h-4"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-pink-400 border border-slate-800 transition-all" title="Instagram">
+        <i data-lucide="instagram" class="w-4 h-4"></i>
+      </a>
+    </div>
+    <p>Online Taklifnoma Olami © 2026. Barcha huquqlar himoyalangan.</p>
+    <p>Aloqa: Telegram <a href="https://t.me/nurmuhammedov_007" class="text-amber-400 hover:underline">@nurmuhammedov_007</a></p>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

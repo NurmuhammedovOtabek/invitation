@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Temurbek & Nodirabegim — Shohona Nikoh Tantanasi</title>
+  
+  <meta property="og:title" content="Temurbek & Nodirabegim — Nikoh To'yi">
+  <meta property="og:description" content="Sizni to'yimizga lutfan taklif etamiz! Sanasi: 12-Dekabr 2026-yil">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <style>
+    :root {
+      --theme-base: #0c1a30;
+      --theme-dark: #030712;
+      --theme-light: #172e4f;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-start pb-28 selection:bg-blue-500 selection:text-white">
+
+  <!-- Twinkling Stars -->
+  <div id="particle-container" class="particle-container" data-effect="sparkling_stars"></div>
+
+  <!-- Language Switcher Float (UZ / RU) -->
+  <div class="lang-switcher-float">
+    <button type="button" id="lang-uz" class="lang-btn active">UZ</button>
+    <button type="button" id="lang-ru" class="lang-btn">RU</button>
+  </div>
+
+  <!-- Floating Audio Button -->
+  <div id="music-toggle-btn" class="music-btn-float" title="Musiqa">
+    <div id="music-equalizer" class="equalizer-container">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+  </div>
+  <audio id="bg-audio" loop preload="auto" src="/audio/piano_evening.mp3"></audio>
+
+  <!-- =========================================================================
+       VELVET CURTAINS OPENING OVERLAY
+       ========================================================================= -->
+  <div id="open-overlay-modal" data-opening-style="curtain_reveal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-700">
+    
+    <div id="main-curtains" class="curtain-container">
+      <div class="curtain-panel left flex items-center justify-end pr-6"></div>
+      <div class="curtain-panel right flex items-center justify-start pl-6"></div>
+      <div class="curtain-center-badge text-center space-y-4">
+        <div class="w-20 h-20 rounded-full bg-gold-luxury text-slate-950 flex items-center justify-center mx-auto shadow-2xl shadow-amber-500/50">
+          <i data-lucide="sparkles" class="w-10 h-10"></i>
+        </div>
+        <p data-lang-uz="SHOHONA TAKLIFNOMA" data-lang-ru="КОРОЛЕВСКОЕ ПРИГЛАШЕНИЕ" class="text-xs uppercase tracking-widest text-amber-300">SHOHONA TAKLIFNOMA</p>
+        <h2 class="font-cinzel font-bold text-3xl sm:text-4xl text-gold-luxury">TEMURBEK & NODIRABEGIM</h2>
+        <span data-lang-uz="Pardani ochish ✨" data-lang-ru="Открыть занавес ✨" class="inline-block px-8 py-3 rounded-full bg-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/40 animate-bounce">Pardani ochish ✨</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       MAIN INVITATION CONTENT
+       ========================================================================= -->
+  <main class="w-full max-w-md px-4 pt-10 flex flex-col items-center text-center z-20 space-y-8">
+
+    <div class="space-y-2">
+      <p class="font-serif-luxury text-xs uppercase tracking-[0.3em] text-amber-400/80">Bismillahir Rohmanir Rohiym</p>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto"></div>
+    </div>
+
+    <div class="px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-500/10 backdrop-blur-sm">
+      <span class="text-xs font-medium uppercase tracking-widest text-blue-300">Nikoh To'yi</span>
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="font-cinzel font-bold text-3xl sm:text-4xl text-gold-luxury tracking-wide leading-tight drop-shadow-md">
+        TEMURBEK & NODIRABEGIM
+      </h1>
+      <p data-lang-uz="Baxtli kelajak sari" data-lang-ru="К счастливому будущему" class="text-xs text-blue-200/70 tracking-widest uppercase font-light">Baxtli kelajak sari</p>
+    </div>
+
+    <!-- Cover Photo -->
+    <div class="relative w-64 h-80 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-b from-blue-400 via-indigo-600 to-slate-950 shadow-2xl shadow-black/80">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Kelin va Kuyov" class="w-full h-full object-cover rounded-[22px]">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Text Card -->
+    <div class="glass-card p-6 w-full text-center space-y-4 border-blue-500/20">
+      <div class="flex justify-center text-blue-400">
+        <i data-lucide="crown" class="w-6 h-6 text-amber-400 animate-pulse"></i>
+      </div>
+      <p class="text-sm md:text-base leading-relaxed text-gray-200 font-light italic">
+        "Hayotimizdagi eng unutilmas va shukuhli oqshomda siz aziz yaqinlarimizni to'y dasturxonimiz atrofida ko'rishdan behad mamnun bo'lamiz!"
+      </p>
+      <div class="w-12 h-0.5 bg-blue-400/40 mx-auto"></div>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="w-full space-y-3">
+      <h3 data-lang-uz="To'y kunigacha qoldi:" data-lang-ru="До свадьбы осталось:" class="text-xs uppercase tracking-widest text-blue-300 font-semibold flex items-center justify-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4"></i> To'y kunigacha qoldi:
+      </h3>
+      
+      <div id="countdown-data" data-date="2026-12-12" data-time="18:00" class="grid grid-cols-4 gap-2 w-full">
+        <div class="countdown-box border-blue-500/30">
+          <span id="days" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Kun" data-lang-ru="Дней" class="text-[10px] uppercase text-gray-400 tracking-wider">Kun</span>
+        </div>
+        <div class="countdown-box border-blue-500/30">
+          <span id="hours" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Soat" data-lang-ru="Часов" class="text-[10px] uppercase text-gray-400 tracking-wider">Soat</span>
+        </div>
+        <div class="countdown-box border-blue-500/30">
+          <span id="minutes" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Daqiqa" data-lang-ru="Минут" class="text-[10px] uppercase text-gray-400 tracking-wider">Daqiqa</span>
+        </div>
+        <div class="countdown-box border-blue-500/30">
+          <span id="seconds" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Soniya" data-lang-ru="Секунд" class="text-[10px] uppercase text-gray-400 tracking-wider">Soniya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Details -->
+    <div class="glass-card p-6 w-full space-y-6 border-blue-500/20 text-left">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 data-lang-uz="Sana va Vaqt" data-lang-ru="Дата и Время" class="text-xs text-amber-400 uppercase tracking-wider font-semibold">Sana va Vaqt</h4>
+          <p class="text-base font-semibold text-white">12-Dekabr 2026-yil</p>
+          <p class="text-xs text-gray-300"><span data-lang-uz="Boshlanish vaqti:" data-lang-ru="Время начала:">Boshlanish vaqti:</span> 18:00</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 data-lang-uz="To'yxona / Manzil" data-lang-ru="Ресторан / Адрес" class="text-xs text-amber-400 uppercase tracking-wider font-semibold">To'yxona / Manzil</h4>
+          <p class="text-base font-semibold text-white">"Versal" Tantanalar Saroyi</p>
+          <p class="text-xs text-gray-300">Toshkent shahri, Shayxontohur tumani</p>
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        <a href="https://yandex.com/maps/?text=Versal+restorani+Toshkent" target="_blank" rel="noopener" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+          <i data-lucide="navigation" class="w-4 h-4"></i> <span data-lang-uz="Yandex Xaritada ochish" data-lang-ru="Открыть в Яндекс Картах">Yandex Xaritada ochish</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Share -->
+    <div class="w-full pt-2 space-y-3">
+      <button onclick="copyInvitationLink()" class="w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-blue-400/40 text-blue-300 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="copy" class="w-4 h-4"></i> <span data-lang-uz="Taklifnoma havolasini nusxalash" data-lang-ru="Скопировать ссылку">Taklifnoma havolasini nusxalash</span>
+      </button>
+    </div>
+
+    <footer class="pt-6 pb-2 text-[11px] text-gray-400 space-y-1">
+      <p>Namuna taklifnoma © 2026</p>
+      <p><a href="/" class="text-blue-400 hover:underline">Boshqa shablonlarni ko'rish</a></p>
+    </footer>
+
+  </main>
+
+  <!-- BOTTOM STICKY ORDER BUTTON (DIRECT TO TELEGRAM) -->
+  <div class="fixed bottom-0 left-0 right-0 p-3 bg-slate-950/95 backdrop-blur-md border-t border-blue-500/30 flex items-center justify-center z-40">
+    <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Midnight%20Royal%22%20onlayn%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="w-full max-w-md py-3 px-6 rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-blue-500/30 flex items-center justify-center gap-2 active:scale-95 transition-all">
+      <i data-lucide="send" class="w-4 h-4"></i> O'z To'yingiz Uchun Buyurtma Berish (50 000 so'm)
+    </a>
+  </div>
+
+  <div id="copy-toast" class="fixed bottom-16 left-1/2 -translate-x-1/2 px-4 py-2 bg-blue-500 text-white text-xs font-bold rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+    ✅ Nusxalandi!
+  </div>
+
+  <script>lucide.createIcons();</script>
+  <script src="/js/invitation.js"></script>
+</body>
+</html>

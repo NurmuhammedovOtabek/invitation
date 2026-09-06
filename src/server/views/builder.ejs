@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taklifnoma Konstruktori — Lego Uslubida Yarating</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+  <style>
+    body {
+      background-color: #080c14;
+      color: #f8fafc;
+    }
+    .tab-btn.active {
+      background-color: rgba(212, 175, 55, 0.15);
+      border-color: #d4af37;
+      color: #fce881;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row items-stretch selection:bg-amber-500 selection:text-slate-950 font-sans">
+
+  <!-- LEFT PANEL: LEGO CONSTRUCTOR CONTROLS -->
+  <aside class="w-full md:w-[470px] bg-slate-900/95 border-r border-slate-800 p-6 flex flex-col justify-between overflow-y-auto max-h-screen custom-scroll z-20">
+    <div class="space-y-5">
+      
+      <!-- Brand Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gold-luxury flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/30">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="font-serif-luxury font-bold text-lg text-white">Lego Konstruktor</h1>
+            <p class="text-[11px] text-gray-400">Har bir qismni o'zingiz tanlang</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <a href="/admin" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-300 text-xs border border-slate-700 flex items-center gap-1.5 transition-all" title="Admin Panel">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span class="text-[10px] hidden sm:inline font-semibold">Admin</span>
+          </a>
+          <a href="/dashboard" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs border border-slate-700 flex items-center gap-1.5 transition-all" title="Shaxsiy Kabinet">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <span class="text-[10px] hidden sm:inline font-semibold">Kabinet</span>
+          </a>
+          <button onclick="reloadIframe()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs border border-slate-700 flex items-center transition-all active:scale-95" title="Qaytadan ochish">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- SEPARATE TABS (5 ta bo'lim) -->
+      <div class="grid grid-cols-5 gap-1 p-1 bg-slate-950/80 rounded-2xl border border-slate-800 text-xs font-semibold">
+        <button type="button" onclick="switchTab('tab-opening')" id="btn-tab-opening" class="tab-btn active py-2 px-1 rounded-xl text-center transition-all flex flex-col items-center gap-1">
+          <i data-lucide="play-circle" class="w-4 h-4"></i>
+          <span class="text-[9px]">1. Ochilish</span>
+        </button>
+        <button type="button" onclick="switchTab('tab-color')" id="btn-tab-color" class="tab-btn py-2 px-1 rounded-xl text-center text-gray-400 hover:text-white transition-all flex flex-col items-center gap-1">
+          <i data-lucide="palette" class="w-4 h-4"></i>
+          <span class="text-[9px]">2. Rang</span>
+        </button>
+        <button type="button" onclick="switchTab('tab-font')" id="btn-tab-font" class="tab-btn py-2 px-1 rounded-xl text-center text-gray-400 hover:text-white transition-all flex flex-col items-center gap-1">
+          <i data-lucide="type" class="w-4 h-4"></i>
+          <span class="text-[9px]">3. Shrift</span>
+        </button>
+        <button type="button" onclick="switchTab('tab-blocks')" id="btn-tab-blocks" class="tab-btn py-2 px-1 rounded-xl text-center text-gray-400 hover:text-white transition-all flex flex-col items-center gap-1">
+          <i data-lucide="plus-square" class="w-4 h-4"></i>
+          <span class="text-[9px]">4. Legolar</span>
+        </button>
+        <button type="button" onclick="switchTab('tab-details')" id="btn-tab-details" class="tab-btn py-2 px-1 rounded-xl text-center text-gray-400 hover:text-white transition-all flex flex-col items-center gap-1">
+          <i data-lucide="edit-3" class="w-4 h-4"></i>
+          <span class="text-[9px]">5. Matn</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: OCHILISH ANIMATSIYASI -->
+      <div id="tab-opening" class="tab-content space-y-3">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <i data-lucide="mail" class="w-4 h-4"></i> Ochilish Animatsiyasini Tanlang:
+        </label>
+        
+        <div class="grid grid-cols-1 gap-2.5">
+          <button type="button" onclick="setOpeningStyle('envelope_wax')" class="btn-opening p-3 rounded-2xl border border-amber-400 bg-amber-500/15 text-left flex items-center justify-between transition-all active:scale-98">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg">✉️</span>
+              <div>
+                <span class="block font-bold text-sm text-white">3D Muhrli Konvert</span>
+                <span class="block text-xs text-gray-400">Oltin muhrli hashamatli konvert</span>
+              </div>
+            </div>
+            <i data-lucide="check-circle" class="w-5 h-5 text-amber-400"></i>
+          </button>
+
+          <button type="button" onclick="setOpeningStyle('ribbon_gift')" class="btn-opening p-3 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-300 flex items-center justify-center text-lg">🎀</span>
+              <div>
+                <span class="block font-bold text-sm text-white">Lenta & Sovg'a Qutisi</span>
+                <span class="block text-xs text-gray-400">Oltin lenta yechilib ochilishi</span>
+              </div>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+
+          <button type="button" onclick="setOpeningStyle('curtain_reveal')" class="btn-opening p-3 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-lg">🎭</span>
+              <div>
+                <span class="block font-bold text-sm text-white">Shohona Parda</span>
+                <span class="block text-xs text-gray-400">Ikkiga ochiluvchi baxmal parda</span>
+              </div>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+
+          <button type="button" onclick="setOpeningStyle('fade_glow')" class="btn-opening p-3 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-lg">✨</span>
+              <div>
+                <span class="block font-bold text-sm text-white">Yulduzli Porlash</span>
+                <span class="block text-xs text-gray-400">Mayin yaltiroq nurlar bilan kirish</span>
+              </div>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+
+          <button type="button" onclick="setOpeningStyle('direct')" class="btn-opening p-3 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg">⚡️</span>
+              <div>
+                <span class="block font-bold text-sm text-white">To'g'ridan-to'g'ri (Ochilishsiz)</span>
+                <span class="block text-xs text-gray-400">Darhol asosiy to'y sahifasi</span>
+              </div>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: RANG VA FON (CUSTOM PICKER) -->
+      <div id="tab-color" class="tab-content hidden space-y-4">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <i data-lucide="palette" class="w-4 h-4"></i> Rang va Konvert Rangi:
+        </label>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <button type="button" onclick="setColor('#0c3327')" class="btn-color p-3 rounded-2xl border border-amber-400 bg-emerald-950/50 flex items-center gap-3 transition-all active:scale-95">
+            <span class="w-6 h-6 rounded-full bg-[#0c3327] border-2 border-amber-400 shadow-md"></span>
+            <span class="text-xs font-semibold text-white">Emerald Oltin</span>
+          </button>
+
+          <button type="button" onclick="setColor('#3d0c14')" class="btn-color p-3 rounded-2xl border border-slate-800 bg-red-950/30 hover:border-slate-700 flex items-center gap-3 transition-all active:scale-95">
+            <span class="w-6 h-6 rounded-full bg-[#3d0c14] border-2 border-red-400 shadow-md"></span>
+            <span class="text-xs font-semibold text-white">Bordo / Qizil</span>
+          </button>
+
+          <button type="button" onclick="setColor('#0c1a30')" class="btn-color p-3 rounded-2xl border border-slate-800 bg-blue-950/30 hover:border-slate-700 flex items-center gap-3 transition-all active:scale-95">
+            <span class="w-6 h-6 rounded-full bg-[#0c1a30] border-2 border-blue-400 shadow-md"></span>
+            <span class="text-xs font-semibold text-white">Midnight Blue</span>
+          </button>
+
+          <button type="button" onclick="setColor('#3d1b2c')" class="btn-color p-3 rounded-2xl border border-slate-800 bg-pink-950/30 hover:border-slate-700 flex items-center gap-3 transition-all active:scale-95">
+            <span class="w-6 h-6 rounded-full bg-[#3d1b2c] border-2 border-pink-400 shadow-md"></span>
+            <span class="text-xs font-semibold text-white">Rose Blush</span>
+          </button>
+        </div>
+
+        <!-- 🌈 CUSTOM COLOR PICKER -->
+        <div class="p-4 rounded-2xl bg-slate-950/90 border border-slate-800 space-y-3">
+          <label class="block text-xs font-semibold text-amber-300 flex items-center justify-between">
+            <span>🌈 O'zingiz Xohlagan Rangni Tanlang:</span>
+            <span id="hex-label" class="font-mono text-[11px] text-gray-400">#0c3327</span>
+          </label>
+          <div class="flex items-center gap-3">
+            <input type="color" id="custom-color-input" value="#0c3327" oninput="onCustomColorChange(this.value)" class="w-12 h-12 rounded-xl bg-transparent border-0 cursor-pointer p-0">
+            <div class="flex-1">
+              <input type="text" id="custom-hex-text" value="#0c3327" oninput="onCustomHexInput(this.value)" placeholder="#0c3327" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Particle Effects Selector -->
+        <div class="space-y-2 pt-2">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Fon Zarrachalari:
+          </label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="setParticle('golden_dust')" class="btn-part p-2.5 rounded-xl border border-amber-400 bg-amber-500/20 text-xs font-medium text-white text-center">✨ Oltin Zarralar</button>
+            <button type="button" onclick="setParticle('rose_petals')" class="btn-part p-2.5 rounded-xl border border-slate-800 bg-slate-800/80 text-xs font-medium text-gray-300 text-center">🌹 Atirgul Barglari</button>
+            <button type="button" onclick="setParticle('sparkling_stars')" class="btn-part p-2.5 rounded-xl border border-slate-800 bg-slate-800/80 text-xs font-medium text-gray-300 text-center">⭐ Yulduzlar</button>
+            <button type="button" onclick="setParticle('none')" class="btn-part p-2.5 rounded-xl border border-slate-800 bg-slate-800/80 text-xs font-medium text-gray-300 text-center">🚫 Zarrachalarsiz</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: SHRIFT VA MATN USLUBI -->
+      <div id="tab-font" class="tab-content hidden space-y-3">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <i data-lucide="type" class="w-4 h-4"></i> Shrift Uslubini Tanlang:
+        </label>
+
+        <div class="space-y-2.5">
+          <button type="button" onclick="setFont('great_vibes')" class="btn-font w-full p-3.5 rounded-2xl border border-amber-400 bg-amber-500/15 text-left flex items-center justify-between transition-all active:scale-98">
+            <div>
+              <span class="block font-great-vibes text-2xl text-amber-300">Alisher & Madina</span>
+              <span class="block text-[11px] text-gray-400">Great Vibes (Nafis Kaligrafik)</span>
+            </div>
+            <i data-lucide="check-circle" class="w-5 h-5 text-amber-400"></i>
+          </button>
+
+          <button type="button" onclick="setFont('playfair')" class="btn-font w-full p-3.5 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div>
+              <span class="block font-playfair font-bold text-xl text-white">Alisher & Madina</span>
+              <span class="block text-[11px] text-gray-400">Playfair Display (Shohona Klassik)</span>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+
+          <button type="button" onclick="setFont('cinzel')" class="btn-font w-full p-3.5 rounded-2xl border border-slate-800 bg-slate-800/60 hover:border-slate-700 text-left flex items-center justify-between transition-all active:scale-98">
+            <div>
+              <span class="block font-cinzel font-bold text-lg text-white">ALISHER & MADINA</span>
+              <span class="block text-[11px] text-gray-400">Cinzel Royal (Rim Shohona Shrifti)</span>
+            </div>
+            <i data-lucide="circle" class="w-5 h-5 text-gray-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 4: QO'SHIMCHA LEGO BLOKLARI -->
+      <div id="tab-blocks" class="tab-content hidden space-y-4">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <i data-lucide="plus-square" class="w-4 h-4"></i> Qo'shimcha Lego Bloklarini Yoqish:
+        </label>
+
+        <!-- 1. Timeline Switch -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+          <div class="space-y-1">
+            <span class="font-bold text-xs text-white block">⏰ To'y Dasturi (Timeline)</span>
+            <span class="text-[11px] text-gray-400 block">Kutib olish, Nikoh, To'y torti vaqtlari</span>
+          </div>
+          <input type="checkbox" id="check-timeline" checked onchange="updateDetails()" class="w-5 h-5 accent-amber-500 rounded cursor-pointer">
+        </div>
+
+        <!-- 2. Dress Code Switch -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+          <div class="space-y-1">
+            <span class="font-bold text-xs text-white block">👗 Dress Code Bloki</span>
+            <span class="text-[11px] text-gray-400 block">Erkaklar va ayollar liboslari rangi</span>
+          </div>
+          <input type="checkbox" id="check-dresscode" checked onchange="updateDetails()" class="w-5 h-5 accent-amber-500 rounded cursor-pointer">
+        </div>
+
+        <!-- 3. Toyona Card Switch -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="space-y-1">
+              <span class="font-bold text-xs text-white block">💳 "To'yona" Karta Raqami</span>
+              <span class="text-[11px] text-gray-400 block">Sovg'a pulini kartaga qabul qilish</span>
+            </div>
+            <input type="checkbox" id="check-toyona" checked onchange="updateDetails()" class="w-5 h-5 accent-amber-500 rounded cursor-pointer">
+          </div>
+          <input type="text" id="input-card" value="8600 1234 5678 9012" oninput="updateDetails()" placeholder="8600 0000 0000 0000" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
+        </div>
+      </div>
+
+      <!-- TAB 5: MATN VA MA'LUMOTLAR -->
+      <div id="tab-details" class="tab-content hidden space-y-3">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <i data-lucide="edit-3" class="w-4 h-4"></i> Ma'lumotlarni Jonli Kiriting:
+        </label>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">Kelin va Kuyov ismlari:</label>
+            <input type="text" id="input-names" value="Alisher & Madina" oninput="updateDetails()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">To'y sanasi:</label>
+              <input type="date" id="input-date" value="2026-10-25" oninput="updateDetails()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">Boshlanish vaqti:</label>
+              <input type="time" id="input-time" value="18:00" oninput="updateDetails()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">To'yxona nomi:</label>
+            <input type="text" id="input-venue" value='"Yakkasaroy" To'\''yxonasi' oninput="updateDetails()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3 TA TANLOV BANNERI & CTA -->
+    <div class="pt-5 border-t border-slate-800 space-y-2">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="https://t.me" target="_blank" class="py-3 px-2 rounded-xl bg-gold-luxury text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 text-center block transition-all active:scale-95">
+          🤖 Botda Yaratish (50k)
+        </a>
+        <a href="https://t.me" target="_blank" class="py-3 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-amber-500/30 text-amber-300 font-bold text-xs text-center block transition-all active:scale-95">
+          💎 Maxsus Buyurtma
+        </a>
+      </div>
+      <p class="text-[10px] text-gray-400 text-center">Tayyor legoni tanlash, o'zingiz terish yoki admin bilan maxsus yaratish mumkin!</p>
+    </div>
+  </aside>
+
+  <!-- RIGHT PANEL: PHONE PREVIEW -->
+  <main class="flex-1 bg-slate-950 flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 relative overflow-hidden">
+    <div class="relative w-[340px] sm:w-[375px] md:w-[390px] h-[680px] sm:h-[740px] md:h-[780px] bg-black rounded-[44px] sm:rounded-[52px] p-2.5 shadow-2xl shadow-amber-500/10 border-[5px] sm:border-[7px] border-slate-800 flex flex-col overflow-hidden">
+      
+      <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 sm:w-32 h-4 sm:h-5 bg-black rounded-full z-40 flex items-center justify-center border border-slate-800/80">
+        <div class="w-10 h-1 bg-slate-800 rounded-full"></div>
+      </div>
+
+      <iframe id="preview-iframe" src="/preview/modular?opening=envelope_wax&theme=%230c3327&particle=golden_dust&font=great_vibes&timeline=1&dresscode=1&toyona=1" class="w-full h-full rounded-[36px] sm:rounded-[44px] border-none bg-slate-950"></iframe>
+
+    </div>
+
+    <div class="mt-4 text-xs text-gray-400 flex items-center gap-2">
+      <i data-lucide="smartphone" class="w-4 h-4 text-amber-400"></i> Telefonda xuddi shunday ochiladi va UZ/RU tilda ishlaydi
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    let currentOpening = 'envelope_wax';
+    let currentColor = '#0c3327';
+    let currentParticle = 'golden_dust';
+    let currentFont = 'great_vibes';
+    let customNames = 'Alisher & Madina';
+    let customDate = '2026-10-25';
+    let customTime = '18:00';
+    let customVenue = '"Yakkasaroy" To\'yxonasi';
+    let customAddress = "Toshkent shahri, Shota Rustaveli ko'chasi 54-uy";
+    let showTimeline = 1;
+    let showDresscode = 1;
+    let showToyona = 1;
+    let customCard = '8600 1234 5678 9012';
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.remove('hidden');
+      document.getElementById('btn-' + tabId).classList.add('active');
+    }
+
+    function setOpeningStyle(style) {
+      currentOpening = style;
+      document.querySelectorAll('.btn-opening').forEach(b => {
+        b.classList.remove('border-amber-400', 'bg-amber-500/15');
+        b.classList.add('border-slate-800', 'bg-slate-800/60');
+      });
+      event.currentTarget.classList.remove('border-slate-800', 'bg-slate-800/60');
+      event.currentTarget.classList.add('border-amber-400', 'bg-amber-500/15');
+      updatePreview();
+    }
+
+    function setColor(hex) {
+      currentColor = hex;
+      document.getElementById('custom-color-input').value = hex;
+      document.getElementById('custom-hex-text').value = hex;
+      document.getElementById('hex-label').innerText = hex;
+      updatePreview();
+    }
+
+    function onCustomColorChange(hex) {
+      currentColor = hex;
+      document.getElementById('custom-hex-text').value = hex;
+      document.getElementById('hex-label').innerText = hex;
+      updatePreview();
+    }
+
+    function onCustomHexInput(hex) {
+      if (/^#[0-9A-F]{6}$/i.test(hex)) {
+        currentColor = hex;
+        document.getElementById('custom-color-input').value = hex;
+        document.getElementById('hex-label').innerText = hex;
+        updatePreview();
+      }
+    }
+
+    function setParticle(particle) {
+      currentParticle = particle;
+      document.querySelectorAll('.btn-part').forEach(b => {
+        b.classList.remove('border-amber-400', 'bg-amber-500/20', 'text-white');
+        b.classList.add('border-slate-800', 'bg-slate-800/80', 'text-gray-300');
+      });
+      event.currentTarget.classList.remove('border-slate-800', 'bg-slate-800/80', 'text-gray-300');
+      event.currentTarget.classList.add('border-amber-400', 'bg-amber-500/20', 'text-white');
+      updatePreview();
+    }
+
+    function setFont(font) {
+      currentFont = font;
+      document.querySelectorAll('.btn-font').forEach(b => {
+        b.classList.remove('border-amber-400', 'bg-amber-500/15');
+        b.classList.add('border-slate-800', 'bg-slate-800/60');
+      });
+      event.currentTarget.classList.remove('border-slate-800', 'bg-slate-800/60');
+      event.currentTarget.classList.add('border-amber-400', 'bg-amber-500/15');
+      updatePreview();
+    }
+
+    function updateDetails() {
+      customNames = document.getElementById('input-names').value || 'Alisher & Madina';
+      customDate = document.getElementById('input-date').value || '2026-10-25';
+      customTime = document.getElementById('input-time').value || '18:00';
+      customVenue = document.getElementById('input-venue').value || '"Yakkasaroy" To\'yxonasi';
+      
+      showTimeline = document.getElementById('check-timeline').checked ? 1 : 0;
+      showDresscode = document.getElementById('check-dresscode').checked ? 1 : 0;
+      showToyona = document.getElementById('check-toyona').checked ? 1 : 0;
+      customCard = document.getElementById('input-card').value || '8600 0000 0000 0000';
+
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const encodedColor = encodeURIComponent(currentColor);
+      const encodedNames = encodeURIComponent(customNames);
+      const encodedVenue = encodeURIComponent(customVenue);
+      const encodedCard = encodeURIComponent(customCard);
+
+      const url = `/preview/modular?opening=${currentOpening}&theme=${encodedColor}&particle=${currentParticle}&font=${currentFont}&names=${encodedNames}&date=${customDate}&time=${customTime}&venue=${encodedVenue}&timeline=${showTimeline}&dresscode=${showDresscode}&toyona=${showToyona}&card=${encodedCard}`;
+      
+      document.getElementById('preview-iframe').src = url;
+    }
+
+    function reloadIframe() {
+      const iframe = document.getElementById('preview-iframe');
+      iframe.src = iframe.src;
+    }
+  </script>
+</body>
+</html>

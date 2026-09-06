@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><%= invitation.groom_name %> — Taklifnoma</title>
+  
+  <meta property="og:title" content="<%= invitation.groom_name %> — <%= invitation.event_type %>">
+  <meta property="og:description" content="Sizni to'yimizga lutfan taklif etamiz! Sanasi: <%= invitation.formattedDate %>">
+  <meta property="og:image" content="<%= invitation.photo_url || baseUrl + '/img/wedding_cover.jpg' %>">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <% 
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      const num = parseInt(hex, 16);
+      return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+    }
+
+    let themeBase = '#0c3327';
+    let themeDark = '#04140f';
+    let themeLight = '#164e3b';
+
+    const rawColor = invitation.theme_color || '#0c3327';
+
+    if (rawColor === 'emerald_gold') {
+      themeBase = '#0c3327'; themeDark = '#04140f'; themeLight = '#164e3b';
+    } else if (rawColor === 'rose_blush') {
+      themeBase = '#2d1521'; themeDark = '#12070d'; themeLight = '#4c1d37';
+    } else if (rawColor === 'midnight_blue') {
+      themeBase = '#0c1a30'; themeDark = '#030712'; themeLight = '#172e4f';
+    } else if (rawColor === 'turquoise_festive') {
+      themeBase = '#064e3b'; themeDark = '#022c22'; themeLight = '#0d6951';
+    } else if (rawColor.startsWith('#')) {
+      themeBase = rawColor;
+      try {
+        const rgb = hexToRgb(rawColor);
+        themeDark = `rgb(${Math.max(0, Math.floor(rgb.r * 0.35))}, ${Math.max(0, Math.floor(rgb.g * 0.35))}, ${Math.max(0, Math.floor(rgb.b * 0.35))})`;
+        themeLight = `rgb(${Math.min(255, Math.floor(rgb.r * 1.4) + 15)}, ${Math.min(255, Math.floor(rgb.g * 1.4) + 15)}, ${Math.min(255, Math.floor(rgb.b * 1.4) + 15)})`;
+      } catch(e){}
+    }
+
+    const fontMap = {
+      great_vibes: 'font-great-vibes',
+      playfair: 'font-playfair',
+      cinzel: 'font-cinzel',
+      alex_brush: 'font-alex-brush',
+      cormorant: 'font-cormorant',
+      montserrat: 'font-montserrat'
+    };
+    const titleFontClass = fontMap[invitation.font_family] || 'font-great-vibes';
+  %>
+
+  <style>
+    :root {
+      --theme-base: <%= themeBase %>;
+      --theme-dark: <%= themeDark %>;
+      --theme-light: <%= themeLight %>;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-start pb-24 selection:bg-amber-500 selection:text-white">
+
+  <!-- Background Particle Effects -->
+  <div id="particle-container" class="particle-container" data-effect="<%= invitation.particle_effect || 'golden_dust' %>"></div>
+
+  <!-- Language Switcher Float (UZ / RU) -->
+  <div class="lang-switcher-float">
+    <button type="button" id="lang-uz" class="lang-btn active">UZ</button>
+    <button type="button" id="lang-ru" class="lang-btn">RU</button>
+  </div>
+
+  <!-- Floating Audio Button -->
+  <div id="music-toggle-btn" class="music-btn-float" title="Musiqa">
+    <div id="music-equalizer" class="equalizer-container">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+  </div>
+  <audio id="bg-audio" loop src="<%= invitation.audio_url || '/audio/romantic_sample.mp3' %>"></audio>
+
+  <!-- =========================================================================
+       DYNAMIC OPENING ANIMATION OVERLAY
+       ========================================================================= -->
+  <% const opening = invitation.opening_style || 'envelope_wax'; %>
+
+  <% if (opening !== 'direct') { %>
+  <div id="open-overlay-modal" data-opening-style="<%= opening %>" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-700">
+    
+    <% if (opening === 'envelope_wax') { %>
+      <div class="mb-6 space-y-2">
+        <p data-lang-uz="MAXSUS TAKLIFNOMA" data-lang-ru="ОСОБОЕ ПРИГЛАШЕНИЕ" class="font-serif-luxury text-xs tracking-[0.3em] uppercase text-amber-300/80">MAXSUS TAKLIFNOMA</p>
+        <h2 class="<%= titleFontClass %> text-4xl md:text-5xl text-gold-luxury"><%= invitation.groom_name %></h2>
+      </div>
+
+      <div id="main-envelope" class="envelope-wrapper my-2">
+        <div class="envelope-back"></div>
+        <div class="envelope-letter">
+          <p data-lang-uz="To'y Taklifnomasi" data-lang-ru="Свадебное Приглашение" class="font-serif-luxury text-[10px] uppercase tracking-widest text-amber-900 font-bold mb-1">To'y Taklifnomasi</p>
+          <h3 class="<%= titleFontClass %> text-2xl text-slate-900 font-bold"><%= invitation.groom_name %></h3>
+          <p class="text-[11px] text-slate-700 mt-1 font-serif-luxury"><%= invitation.formattedDate || invitation.event_date %></p>
+          <div class="w-8 h-0.5 bg-amber-500 my-2"></div>
+          <p data-lang-uz="Ochilmoqda..." data-lang-ru="Открывается..." class="text-[9px] text-slate-500 italic">Ochilmoqda...</p>
+        </div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-flap"></div>
+        <div class="wax-seal animate-pulse-glow">
+          <i data-lucide="crown" class="w-7 h-7 text-amber-950 fill-amber-900/40"></i>
+        </div>
+      </div>
+
+    <% } else if (opening === 'ribbon_gift') { %>
+      <div class="mb-6 space-y-2">
+        <p data-lang-uz="SOVG'ABOP TAKLIFNOMA" data-lang-ru="ПРАЗДНИЧНОЕ ПРИГЛАШЕНИЕ" class="font-serif-luxury text-xs tracking-[0.3em] uppercase text-amber-300/80">SOVG'ABOP TAKLIFNOMA</p>
+        <h2 class="<%= titleFontClass %> text-4xl md:text-5xl text-gold-luxury"><%= invitation.groom_name %></h2>
+      </div>
+
+      <div id="main-giftbox" class="gift-box-wrapper my-2">
+        <div class="ribbon-h"></div>
+        <div class="ribbon-v"></div>
+        <div class="ribbon-bow">
+          <i data-lucide="gift" class="w-8 h-8 text-amber-950"></i>
+        </div>
+      </div>
+
+    <% } else if (opening === 'curtain_reveal') { %>
+      <div id="main-curtains" class="curtain-container">
+        <div class="curtain-panel left flex items-center justify-end pr-6"></div>
+        <div class="curtain-panel right flex items-center justify-start pl-6"></div>
+        <div class="curtain-center-badge text-center space-y-4">
+          <div class="w-20 h-20 rounded-full bg-gold-luxury text-slate-950 flex items-center justify-center mx-auto shadow-2xl shadow-amber-500/50">
+            <i data-lucide="sparkles" class="w-10 h-10"></i>
+          </div>
+          <h2 class="<%= titleFontClass %> text-4xl text-gold-luxury"><%= invitation.groom_name %></h2>
+          <span data-lang-uz="Pardani ochish ✨" data-lang-ru="Открыть занавес ✨" class="inline-block px-6 py-2 rounded-full bg-amber-500 text-slate-950 font-bold text-xs">Pardani ochish ✨</span>
+        </div>
+      </div>
+
+    <% } else { %>
+      <div class="glow-burst space-y-6">
+        <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center mx-auto shadow-2xl shadow-amber-500/50">
+          <i data-lucide="sparkles" class="w-12 h-12 text-slate-950"></i>
+        </div>
+        <h2 class="<%= titleFontClass %> text-5xl text-gold-luxury"><%= invitation.groom_name %></h2>
+        <p data-lang-uz="Taklifnomani ochish va musiqani tinglash uchun bosing" data-lang-ru="Нажмите, чтобы открыть приглашение с музыкой" class="text-xs text-gray-300">Taklifnomani ochish va musiqani tinglash uchun bosing</p>
+      </div>
+    <% } %>
+
+    <% if (opening !== 'curtain_reveal') { %>
+    <div class="mt-8 space-y-2">
+      <span class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs tracking-wider shadow-lg shadow-amber-500/40 animate-bounce">
+        <i data-lucide="mail-open" class="w-4 h-4"></i> <span data-lang-uz="Ochish uchun bosing" data-lang-ru="Нажмите, чтобы открыть">Ochish uchun bosing</span>
+      </span>
+      <p data-lang-uz="Musiqa bilan birga ochiladi 🎵" data-lang-ru="Откроется с красивой музыкой 🎵" class="text-[11px] text-gray-400">Musiqa bilan birga ochiladi 🎵</p>
+    </div>
+    <% } %>
+
+  </div>
+  <% } %>
+
+  <!-- =========================================================================
+       MAIN INVITATION CONTENT
+       ========================================================================= -->
+  <main class="w-full max-w-md px-4 pt-10 flex flex-col items-center text-center z-20 space-y-8">
+
+    <div class="space-y-2">
+      <p class="font-serif-luxury text-xs uppercase tracking-[0.3em] text-amber-400/80">Bismillahir Rohmanir Rohiym</p>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto"></div>
+    </div>
+
+    <div class="px-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm">
+      <span class="text-xs font-medium uppercase tracking-widest text-amber-300"><%= invitation.event_type %></span>
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="<%= titleFontClass %> text-5xl md:text-6xl text-gold-luxury tracking-wide leading-tight drop-shadow-md">
+        <%= invitation.groom_name %>
+      </h1>
+      <p data-lang-uz="Baxt oqshomi" data-lang-ru="Торжественный вечер" class="text-xs text-amber-200/70 tracking-widest uppercase font-light">Baxt oqshomi</p>
+    </div>
+
+    <% if (invitation.photo_url) { %>
+    <div class="relative w-64 h-80 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-b from-amber-400 via-amber-600 to-slate-900 shadow-2xl shadow-black/80">
+      <img src="<%= invitation.photo_url %>" alt="<%= invitation.groom_name %>" class="w-full h-full object-cover rounded-[22px]">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+    </div>
+    <% } %>
+
+    <!-- Invitation Text Card -->
+    <div class="glass-card p-6 w-full text-center space-y-4 border-amber-500/20">
+      <div class="flex justify-center text-amber-400">
+        <i data-lucide="heart" class="w-6 h-6 fill-amber-400 animate-pulse"></i>
+      </div>
+      <p class="text-sm md:text-base leading-relaxed text-gray-200 font-light italic">
+        "<%= invitation.custom_text || 'Hurmatli qadrdonimiz! Sizni va oila a\'zolaringizni hayotimizdagi eng quvonchli va unutilmas kunimiz — baxt to\'yimiz munosabati bilan yoziladigan dasturxonimizga lutfan taklif etamiz!' %>"
+      </p>
+      <div class="w-12 h-0.5 bg-amber-400/40 mx-auto"></div>
+    </div>
+
+    <!-- Live Countdown -->
+    <div class="w-full space-y-3">
+      <h3 data-lang-uz="To'y kunigacha qoldi:" data-lang-ru="До свадьбы осталось:" class="text-xs uppercase tracking-widest text-amber-400 font-semibold flex items-center justify-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4"></i> To'y kunigacha qoldi:
+      </h3>
+      
+      <div id="countdown-data" data-date="<%= invitation.event_date %>" data-time="<%= invitation.event_time %>" class="grid grid-cols-4 gap-2 w-full">
+        <div class="countdown-box">
+          <span id="days" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Kun" data-lang-ru="Дней" class="text-[10px] uppercase text-gray-400 tracking-wider">Kun</span>
+        </div>
+        <div class="countdown-box">
+          <span id="hours" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Soat" data-lang-ru="Часов" class="text-[10px] uppercase text-gray-400 tracking-wider">Soat</span>
+        </div>
+        <div class="countdown-box">
+          <span id="minutes" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Daqiqa" data-lang-ru="Минут" class="text-[10px] uppercase text-gray-400 tracking-wider">Daqiqa</span>
+        </div>
+        <div class="countdown-box">
+          <span id="seconds" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span data-lang-uz="Soniya" data-lang-ru="Секунд" class="text-[10px] uppercase text-gray-400 tracking-wider">Soniya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGO BLOCK 1: TO'Y DASTURI / TIMELINE -->
+    <% if (invitation.show_timeline !== false) { %>
+    <div class="glass-card p-6 w-full space-y-4 border-amber-500/20 text-left">
+      <div class="text-center space-y-1">
+        <h4 data-lang-uz="To'y Dasturi" data-lang-ru="Программа Торжества" class="font-serif-luxury text-lg text-amber-300 font-bold">To'y Dasturi</h4>
+        <p data-lang-uz="Kunning asosiy vaqtlari" data-lang-ru="Главные моменты дня" class="text-[11px] text-gray-400">Kunning asosiy vaqtlari</p>
+      </div>
+
+      <div class="space-y-4 pt-2">
+        <div class="timeline-item">
+          <span class="text-xs font-bold text-amber-400"><%= invitation.event_time || '18:00' %></span>
+          <h5 data-lang-uz="Mehmonlarni kutib olish" data-lang-ru="Встреча гостей" class="text-sm font-semibold text-white">Mehmonlarni kutib olish</h5>
+          <p data-lang-uz="Yoqimli musiqa va dasturxonga taklif" data-lang-ru="Приветственные напитки и музыка" class="text-xs text-gray-400">Yoqimli musiqa va dasturxonga taklif</p>
+        </div>
+        <div class="timeline-item">
+          <span class="text-xs font-bold text-amber-400">18:45</span>
+          <h5 data-lang-uz="Kelin-Kuyovning kirib kelishi" data-lang-ru="Торжественный вход молодоженов" class="text-sm font-semibold text-white">Kelin-Kuyovning kirib kelishi</h5>
+          <p data-lang-uz="Nikoh oqshomi va tabriklar" data-lang-ru="Начало свадебного вечера" class="text-xs text-gray-400">Nikoh oqshomi va tabriklar</p>
+        </div>
+        <div class="timeline-item">
+          <span class="text-xs font-bold text-amber-400">20:30</span>
+          <h5 data-lang-uz="To'y torti va bayram shousi" data-lang-ru="Свадебный торт и праздничное шоу" class="text-sm font-semibold text-white">To'y torti va bayram shousi</h5>
+          <p data-lang-uz="Quvonchli raqslar va tilaklar" data-lang-ru="Зажигательные танцы и тосты" class="text-xs text-gray-400">Quvonchli raqslar va tilaklar</p>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- LEGO BLOCK 2: DRESS CODE -->
+    <% if (invitation.show_dresscode !== false) { %>
+    <div class="glass-card p-6 w-full space-y-4 border-amber-500/20 text-center">
+      <div class="space-y-1">
+        <h4 class="font-serif-luxury text-lg text-amber-300 font-bold">Dress Code</h4>
+        <p data-lang-uz="Marosimimizning tavsiya etilgan liboslar rangi" data-lang-ru="Рекомендуемая цветовая гамма нарядов" class="text-xs text-gray-300">Marosimimizning tavsiya etilgan liboslar rangi</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 pt-2 text-left">
+        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2">
+          <span data-lang-uz="Erkaklar uchun:" data-lang-ru="Для мужчин:" class="block text-xs font-semibold text-amber-400">Erkaklar uchun:</span>
+          <div class="flex items-center gap-2">
+            <span class="dress-swatch bg-[#0f172a]" title="Klassik to'q rang"></span>
+            <span class="dress-swatch bg-[#1e293b]" title="Qora / To'q ko'k"></span>
+            <span class="dress-swatch bg-[#334155]" title="Kulrang"></span>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2">
+          <span data-lang-uz="Ayollar uchun:" data-lang-ru="Для женщин:" class="block text-xs font-semibold text-pink-300">Ayollar uchun:</span>
+          <div class="flex items-center gap-2">
+            <span class="dress-swatch bg-[#fbcfe8]" title="Pushti pastel"></span>
+            <span class="dress-swatch bg-[#fce7f3]" title="Nafis qaymoqrang"></span>
+            <span class="dress-swatch bg-[#fed7aa]" title="Oltin jilo"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Event Details & Location Card -->
+    <div class="glass-card p-6 w-full space-y-6 border-amber-500/20 text-left">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 data-lang-uz="Sana va Vaqt" data-lang-ru="Дата и Время" class="text-xs text-amber-400 uppercase tracking-wider font-semibold">Sana va Vaqt</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.formattedDate || invitation.event_date %></p>
+          <p class="text-xs text-gray-300"><span data-lang-uz="Boshlanish vaqti:" data-lang-ru="Время начала:">Boshlanish vaqti:</span> <%= invitation.event_time || '18:00' %></p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 data-lang-uz="To'yxona / Manzil" data-lang-ru="Ресторан / Адрес" class="text-xs text-amber-400 uppercase tracking-wider font-semibold">To'yxona / Manzil</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.venue_name %></p>
+          <p class="text-xs text-gray-300"><%= invitation.venue_address || 'Manzil ko\'rsatilmagan' %></p>
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        <% if (invitation.yandex_map_url) { %>
+        <a href="<%= invitation.yandex_map_url %>" target="_blank" rel="noopener" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+          <i data-lucide="navigation" class="w-4 h-4"></i> <span data-lang-uz="Yandex Xaritada ochish" data-lang-ru="Открыть в Яндекс Картах">Yandex Xaritada ochish</span>
+        </a>
+        <% } %>
+        <a href="/i/<%= invitation.id %>/calendar" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-500/30 text-amber-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i> <span data-lang-uz="Taqvimga saqlash" data-lang-ru="Добавить в календарь">Taqvimga saqlash</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- LEGO BLOCK 3: TO'YONA KARTA RAQAMI -->
+    <% if (invitation.card_number || invitation.show_toyona !== false) { %>
+    <div class="glass-card p-6 w-full space-y-4 border-amber-500/20 text-center">
+      <div class="space-y-1">
+        <h4 data-lang-uz="To'yona" data-lang-ru="Поздравление (Тойона)" class="font-serif-luxury text-lg text-amber-300 font-bold">To'yona</h4>
+        <p data-lang-uz="To'yonani masofadan qulay yuborishingiz mumkin" data-lang-ru="Вы можете отправить свадебный подарок онлайн" class="text-xs text-gray-300">To'yonani masofadan qulay yuborishingiz mumkin</p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-black/40 border border-amber-500/30 space-y-3">
+        <div class="flex justify-between items-center text-xs">
+          <span data-lang-uz="Qabul qiluvchi:" data-lang-ru="Получатель:" class="text-gray-400">Qabul qiluvchi:</span>
+          <span class="font-bold text-amber-300"><%= invitation.card_holder || invitation.groom_name %></span>
+        </div>
+        
+        <div class="flex justify-between items-center text-sm font-mono font-bold text-white bg-slate-900/80 px-4 py-2.5 rounded-xl border border-slate-700">
+          <span><%= invitation.card_number || '8600 0000 0000 0000' %></span>
+          <i data-lucide="credit-card" class="w-4 h-4 text-amber-400"></i>
+        </div>
+
+        <button type="button" onclick="copyCardNumber('<%= invitation.card_number || '8600 0000 0000 0000' %>')" class="w-full py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center justify-center gap-2 transition-all active:scale-95">
+          <i data-lucide="copy" class="w-4 h-4"></i> <span data-lang-uz="Karta raqamini nusxalash" data-lang-ru="Скопировать номер карты">Karta raqamini nusxalash</span>
+        </button>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- LEGO BLOCK 4: MEHMONLAR TILAKLARI VA SHARHLAR -->
+    <div class="glass-card p-6 w-full space-y-4 border-amber-500/20 text-left">
+      <div class="text-center space-y-1">
+        <h4 data-lang-uz="Ezgu Tilaklar va Sharhlar" data-lang-ru="Пожелания и Отзывы" class="font-serif-luxury text-lg text-amber-300 font-bold">Ezgu Tilaklar va Sharhlar</h4>
+        <p data-lang-uz="Kelin-kuyovga o'z tilaklaringizni qoldiring" data-lang-ru="Оставьте ваши теплые пожелания молодоженам" class="text-[11px] text-gray-300">Kelin-kuyovga o'z tilaklaringizni qoldiring</p>
+      </div>
+
+      <!-- Review Form -->
+      <form id="review-form" onsubmit="submitGuestReview(event)" class="space-y-3 pt-2">
+        <input type="hidden" name="invitation_id" value="<%= invitation.id %>">
+        <div>
+          <input type="text" id="review-author" name="author_name" required placeholder="Ismingiz (masalan: Rustam va Nilufar)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none">
+        </div>
+        <div>
+          <textarea id="review-comment" name="comment" required rows="2" placeholder="Kelin va kuyovga samimiy tilaklaringiz..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700 text-white text-xs focus:border-amber-400 focus:outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-gold-luxury text-slate-950 font-bold text-xs flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i> <span data-lang-uz="Tilak yuborish" data-lang-ru="Отправить пожелание">Tilak yuborish</span>
+        </button>
+      </form>
+
+      <!-- Recent Wishes List -->
+      <div id="reviews-list-box" class="space-y-2.5 pt-2 border-t border-slate-800">
+        <p class="text-[11px] text-gray-400 italic text-center" id="empty-reviews-hint">Birinchi bo'lib tilak qoldiring! ✨</p>
+      </div>
+    </div>
+
+    <!-- Share -->
+    <div class="w-full pt-2 space-y-3">
+      <button onclick="copyInvitationLink()" class="w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-400/40 text-amber-300 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="copy" class="w-4 h-4"></i> <span data-lang-uz="Taklifnoma havolasini nusxalash" data-lang-ru="Скопировать ссылку приглашения">Taklifnoma havolasini nusxalash</span>
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-amber-500 text-slate-950 text-xs font-bold rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+      ✅ Havola nusxalandi!
+    </div>
+
+    <footer class="pt-8 pb-4 text-[11px] text-gray-500 space-y-1">
+      <p>Barcha huquqlar himoyalangan © <%= new Date().getFullYear() %></p>
+      <p>Online Taklifnomalar Platformasi</p>
+    </footer>
+
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="/js/invitation.js"></script>
+</body>
+</html>

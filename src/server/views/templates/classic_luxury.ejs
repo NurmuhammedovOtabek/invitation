@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><%= invitation.groom_name %> — Taklifnoma</title>
+  
+  <!-- OpenGraph Meta for Telegram & WhatsApp Rich Preview -->
+  <meta property="og:title" content="<%= invitation.groom_name %> — <%= invitation.event_type %>">
+  <meta property="og:description" content="Sizni to'yimizga lutfan taklif etamiz! Sanasi: <%= invitation.formattedDate %>">
+  <meta property="og:image" content="<%= invitation.photo_url || baseUrl + '/img/wedding_cover.jpg' %>">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom Luxury CSS -->
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0c3327 0%, #051611 100%);
+      color: #f1f5f9;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-start pb-24 selection:bg-amber-500 selection:text-white">
+
+  <!-- Background Petals / Particles -->
+  <div id="particle-container" class="particle-container"></div>
+
+  <!-- Floating Audio Button -->
+  <div id="music-toggle-btn" class="music-btn-float" title="Musiqa">
+    <div id="music-equalizer" class="equalizer-container">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+  </div>
+  <audio id="bg-audio" loop src="<%= invitation.audio_url || '/audio/romantic_sample.mp3' %>"></audio>
+
+  <!-- 3D Realistic Interactive Envelope Opening Screen -->
+  <div id="open-envelope-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-700">
+    <div class="mb-8 space-y-2">
+      <p class="font-serif-luxury text-xs tracking-[0.3em] uppercase text-amber-300/80">Maxsus Taklifnoma</p>
+      <h2 class="font-script text-4xl md:text-5xl text-gold-luxury"><%= invitation.groom_name %></h2>
+    </div>
+
+    <!-- The 3D Envelope Box -->
+    <div id="main-envelope" class="envelope-wrapper my-4">
+      <div class="envelope-back"></div>
+      
+      <!-- Letter inside that rises up -->
+      <div class="envelope-letter">
+        <p class="font-serif-luxury text-[10px] uppercase tracking-widest text-amber-800 font-bold mb-1">To'y Taklifnomasi</p>
+        <h3 class="font-script text-2xl text-slate-900 font-bold"><%= invitation.groom_name %></h3>
+        <p class="text-[11px] text-slate-700 mt-2 font-serif-luxury"><%= invitation.formattedDate || invitation.event_date %></p>
+        <div class="w-8 h-0.5 bg-amber-500 my-2"></div>
+        <p class="text-[9px] text-slate-500 italic">Ochilmoqda...</p>
+      </div>
+
+      <div class="envelope-pocket"></div>
+      <div class="envelope-flap"></div>
+
+      <!-- Wax Seal Stamp -->
+      <div class="wax-seal animate-pulse-glow">
+        <i data-lucide="crown" class="w-7 h-7 text-amber-950 fill-amber-900/40"></i>
+      </div>
+    </div>
+
+    <div class="mt-10 space-y-2">
+      <span class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs tracking-wider shadow-lg shadow-amber-500/40 animate-bounce">
+        <i data-lucide="mail-open" class="w-4 h-4"></i> Ochish uchun bosing
+      </span>
+      <p class="text-[11px] text-gray-400">Musiqa bilan birga ochiladi 🎵</p>
+    </div>
+  </div>
+
+  <!-- Main Mobile Container -->
+  <main class="w-full max-w-md px-4 pt-10 flex flex-col items-center text-center z-20 space-y-8">
+
+    <!-- Bismillah / Top Arabic Calligraphy Ornaments -->
+    <div class="space-y-2">
+      <p class="font-serif-luxury text-xs uppercase tracking-[0.3em] text-amber-400/80">Bismillahir Rohmanir Rohiym</p>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto"></div>
+    </div>
+
+    <!-- Event Type Subtitle -->
+    <div class="px-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm">
+      <span class="text-xs font-medium uppercase tracking-widest text-amber-300"><%= invitation.event_type %></span>
+    </div>
+
+    <!-- Couple Names Hero Title -->
+    <div class="space-y-2">
+      <h1 class="font-script text-5xl md:text-6xl text-gold-luxury tracking-wide leading-tight drop-shadow-md">
+        <%= invitation.groom_name %>
+      </h1>
+      <p class="text-xs text-amber-200/70 tracking-widest uppercase font-light">Baxt oqshomi</p>
+    </div>
+
+    <!-- Couple Photo (if uploaded) -->
+    <% if (invitation.photo_url) { %>
+    <div class="relative w-64 h-80 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-b from-amber-400 via-amber-600 to-amber-900 shadow-2xl shadow-emerald-950/60">
+      <img src="<%= invitation.photo_url %>" alt="<%= invitation.groom_name %>" class="w-full h-full object-cover rounded-[22px]">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+    </div>
+    <% } %>
+
+    <!-- Romantic Invitation Message Card -->
+    <div class="glass-card p-6 w-full text-center space-y-4 border-amber-500/20">
+      <div class="flex justify-center text-amber-400">
+        <i data-lucide="heart" class="w-6 h-6 fill-amber-400 animate-pulse"></i>
+      </div>
+      <p class="text-sm md:text-base leading-relaxed text-gray-200 font-light italic">
+        "<%= invitation.custom_text || 'Hurmatli qadrdonimiz! Sizni va oila a\'zolaringizni hayotimizdagi eng quvonchli va unutilmas kunimiz — baxt to\'yimiz munosabati bilan yoziladigan dasturxonimizga lutfan taklif etamiz!' %>"
+      </p>
+      <div class="w-12 h-0.5 bg-amber-400/40 mx-auto"></div>
+    </div>
+
+    <!-- Live Countdown Timer -->
+    <div class="w-full space-y-3">
+      <h3 class="text-xs uppercase tracking-widest text-amber-400 font-semibold flex items-center justify-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4"></i> To'y kunigacha qoldi:
+      </h3>
+      
+      <div id="countdown-data" data-date="<%= invitation.event_date %>" data-time="<%= invitation.event_time %>" class="grid grid-cols-4 gap-2 w-full">
+        <div class="countdown-box">
+          <span id="days" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Kun</span>
+        </div>
+        <div class="countdown-box">
+          <span id="hours" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Soat</span>
+        </div>
+        <div class="countdown-box">
+          <span id="minutes" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Daqiqa</span>
+        </div>
+        <div class="countdown-box">
+          <span id="seconds" class="block text-2xl md:text-3xl font-bold font-serif-luxury text-amber-300">00</span>
+          <span class="text-[10px] uppercase text-gray-400 tracking-wider">Soniya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Details & Schedule Card -->
+    <div class="glass-card p-6 w-full space-y-6 border-amber-500/20 text-left">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="text-xs text-amber-400 uppercase tracking-wider font-semibold">Sana va Vaqt</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.formattedDate || invitation.event_date %></p>
+          <p class="text-xs text-gray-300">Boshlanish vaqti: <%= invitation.event_time || '18:00' %></p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-300">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="text-xs text-amber-400 uppercase tracking-wider font-semibold">To'yxona / Manzil</h4>
+          <p class="text-base font-semibold text-white"><%= invitation.venue_name %></p>
+          <p class="text-xs text-gray-300"><%= invitation.venue_address || 'Manzil ko\'rsatilmagan' %></p>
+        </div>
+      </div>
+
+      <!-- Action Buttons: Yandex Maps & Calendar -->
+      <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        <% if (invitation.yandex_map_url) { %>
+        <a href="<%= invitation.yandex_map_url %>" target="_blank" rel="noopener" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+          <i data-lucide="navigation" class="w-4 h-4"></i> Yandex Xaritada ochish
+        </a>
+        <% } %>
+        <a href="/i/<%= invitation.id %>/calendar" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-500/30 text-amber-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i> Taqvimga saqlash
+        </a>
+      </div>
+    </div>
+
+    <!-- Share & Copy Link Button -->
+    <div class="w-full pt-4 space-y-3">
+      <button onclick="copyInvitationLink()" class="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-400/40 text-amber-300 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="copy" class="w-4 h-4"></i> Taklifnoma havolasini nusxalash
+      </button>
+
+      <div class="flex justify-center gap-4 text-xs text-gray-400">
+        <a href="https://t.me/share/url?url=<%= baseUrl %>/i/<%= invitation.id %>&text=<%= encodeURIComponent('Sizni to\'yimizga lutfan taklif etamiz! 🎉') %>" target="_blank" class="hover:text-amber-400 flex items-center gap-1">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i> Telegram
+        </a>
+      </div>
+    </div>
+
+    <!-- Toast Notification for Copy -->
+    <div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-amber-500 text-slate-950 text-xs font-bold rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+      ✅ Havola nusxalandi!
+    </div>
+
+    <!-- Footer Branding -->
+    <footer class="pt-8 pb-4 text-[11px] text-gray-500 space-y-1">
+      <p>Barcha huquqlar himoyalangan © <%= new Date().getFullYear() %></p>
+      <p>Ushbu online taklifnoma Telegram bot orqali yaratildi</p>
+    </footer>
+
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="/js/invitation.js"></script>
+</body>
+</html>
