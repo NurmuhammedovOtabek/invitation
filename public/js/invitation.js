@@ -102,6 +102,17 @@ function initOpeningExperience() {
 
   let isPlaying = false;
 
+  // Add paused icon if not already present
+  let iconPaused = document.getElementById('music-paused-icon');
+  if (btn && !iconPaused) {
+    iconPaused = document.createElement('span');
+    iconPaused.id = 'music-paused-icon';
+    iconPaused.innerHTML = '🔇';
+    iconPaused.style.fontSize = '18px';
+    iconPaused.style.display = 'none';
+    btn.appendChild(iconPaused);
+  }
+
   function showMusicButton() {
     if (btn) btn.classList.add('visible');
   }
@@ -110,8 +121,12 @@ function initOpeningExperience() {
     if (!audio) return;
     audio.play().then(() => {
       isPlaying = true;
-      if (btn) btn.classList.add('playing');
+      if (btn) {
+        btn.classList.add('playing');
+        btn.classList.remove('paused');
+      }
       if (eq) eq.style.display = 'flex';
+      if (iconPaused) iconPaused.style.display = 'none';
     }).catch(e => {
       console.log('Audio autoplay:', e);
     });
@@ -121,8 +136,12 @@ function initOpeningExperience() {
     if (!audio) return;
     audio.pause();
     isPlaying = false;
-    if (btn) btn.classList.remove('playing');
+    if (btn) {
+      btn.classList.remove('playing');
+      btn.classList.add('paused');
+    }
     if (eq) eq.style.display = 'none';
+    if (iconPaused) iconPaused.style.display = 'block';
   }
 
   if (btn) {

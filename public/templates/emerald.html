@@ -26,11 +26,18 @@
   <!-- Background Particle Effects -->
   <div id="particle-container" class="particle-container" data-effect="golden_dust"></div>
 
-  <!-- Language Switcher Float (UZ / RU) -->
-  <div class="lang-switcher-float">
-    <button type="button" id="lang-uz" class="lang-btn active">UZ</button>
-    <button type="button" id="lang-ru" class="lang-btn">RU</button>
-  </div>
+  <!-- Top Navigation Bar for Mobile -->
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none">
+    <a href="/" class="pointer-events-auto py-2 px-3.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-amber-500/40 text-amber-300 text-xs font-semibold flex items-center gap-1.5 shadow-lg backdrop-blur-md active:scale-95 transition-all">
+      <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> <span>Barcha shablonlar</span>
+    </a>
+
+    <!-- Language Switcher Float (UZ / RU) -->
+    <div class="lang-switcher-float pointer-events-auto !static !top-auto !right-auto">
+      <button type="button" id="lang-uz" class="lang-btn active">UZ</button>
+      <button type="button" id="lang-ru" class="lang-btn">RU</button>
+    </div>
+  </header>
 
   <!-- Floating Audio Button -->
   <div id="music-toggle-btn" class="music-btn-float" title="Musiqa">
@@ -81,7 +88,7 @@
   <!-- =========================================================================
        MAIN INVITATION CONTENT
        ========================================================================= -->
-  <main class="w-full max-w-md px-4 pt-10 flex flex-col items-center text-center z-20 space-y-8">
+  <main class="w-full max-w-md px-4 pt-16 flex flex-col items-center text-center z-20 space-y-8">
 
     <div class="space-y-2">
       <p class="font-serif-luxury text-xs uppercase tracking-[0.3em] text-amber-400/80">Bismillahir Rohmanir Rohiym</p>
@@ -271,7 +278,7 @@
   <!-- BOTTOM STICKY ORDER BUTTON (DIRECT TO TELEGRAM) -->
   <div class="fixed bottom-0 left-0 right-0 p-3 bg-slate-950/95 backdrop-blur-md border-t border-amber-500/30 flex items-center justify-center z-40">
     <a href="https://t.me/nurmuhammedov_007?text=Assalomu%20alaykum!%20Men%20%22Emerald%20Luxury%22%20onlayn%20taklifnomasiga%20buyurtma%20bermoqchiman." target="_blank" class="w-full max-w-md py-3 px-6 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/30 flex items-center justify-center gap-2 active:scale-95 transition-all">
-      <i data-lucide="send" class="w-4 h-4"></i> O'z To'yingiz Uchun Buyurtma Berish (50 000 so'm)
+      <i data-lucide="send" class="w-4 h-4"></i> O'z To'yingiz Uchun Buyurtma Berish ✨
     </a>
   </div>
 

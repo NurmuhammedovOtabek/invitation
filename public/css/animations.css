@@ -87,21 +87,22 @@ body {
 /* Floating Audio Button */
 .music-btn-float {
   position: fixed;
-  bottom: 24px;
-  right: 20px;
-  z-index: 40;
+  bottom: 85px; /* Safely above sticky order bar */
+  right: 18px;
+  z-index: 50;  /* Always above cards and sticky bar */
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 2px solid #d4af37;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   pointer-events: none;
 }
@@ -112,8 +113,13 @@ body {
 }
 
 .music-btn-float.playing {
-  animation: rotateDisc 6s linear infinite;
   border-color: #f6d365;
+  box-shadow: 0 0 20px rgba(246, 211, 101, 0.6);
+}
+
+.music-btn-float.paused {
+  border-color: #64748b;
+  opacity: 0.9;
 }
 
 @keyframes rotateDisc {
